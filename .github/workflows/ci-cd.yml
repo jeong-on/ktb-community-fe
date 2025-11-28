@@ -52,7 +52,7 @@ jobs:
         context: ./frontend
         file: ./frontend/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/community-frontend:v1.1
+        tags: ${{ secrets.DOCKER_USERNAME }}/community-frontend:v1.2
 
   # 3. 배포 (Deploy)
   deploy:
@@ -68,7 +68,7 @@ jobs:
         port: 22
         script: |
           # 1. 최신 이미지 가져오기
-          docker pull ${{ secrets.DOCKER_USERNAME }}/community-frontend:v1.1
+          docker pull ${{ secrets.DOCKER_USERNAME }}/community-frontend:v1.2
           
           # 2. 배포 폴더로 이동 (없으면 생성)
           mkdir -p /home/${{ secrets.SERVER_USER }}/frontend-deploy
@@ -78,7 +78,7 @@ jobs:
           echo "version: '3.8'
           services:
             frontend:
-              image: ${{ secrets.DOCKER_USERNAME }}/community-frontend:v1.1
+              image: ${{ secrets.DOCKER_USERNAME }}/community-frontend:v1.2
               container_name: community-fe
               restart: always
               ports:
